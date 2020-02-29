@@ -4,7 +4,7 @@
 ### Declare things
 ################################################################################
 
-BLOB="https://github.com/MartinRosenberg/Mac-Setup/blob/master"
+BLOB="https://raw.githubusercontent.com/MartinRosenberg/Mac-Setup/master"
 
 function copy_dotfiles {
 	cd ~
