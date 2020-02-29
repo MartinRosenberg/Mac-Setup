@@ -1,0 +1,41 @@
+[credential]
+	helper = osxkeychain
+[core]
+	# editor = atom --wait
+	editor = vim
+	excludesfile = /Users/martin/.gitignore_global
+[user]
+	name = Martin Rosenberg
+	email = Martin.B.Rosenberg@gmail.com
+	user = martin
+	signingkey = E932A71EB9A7DA2C
+[push]
+	default = simple
+[alias]
+	close-pr = "!OLD_BRANCH=\"$(git rev-parse --abbrev-ref HEAD)\" && git checkout master && git pull --prune && git branch -D $OLD_BRANCH"
+	pr = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""	
+	fuckit = !rm -rf .git
+	head = diff HEAD
+	new = !git init && git add . && git commit -m \"Initial commit\"
+	rekt = reset --hard
+	rename = branch -m
+	rename-tag = !git tag \"$2\" \"$1\" && git tag -d \"$1\" 
+	unadd = reset HEAD
+	save-patch = diff > diff.patch
+	apply-patch = !patch -p1 < diff.patch
+	delete-remote-tag = !git push origin :refs/tags/\"$1\" #
+	replace-remote-tag = !git push origin refs/tags/\"$1\":refs/tags/\"$1\" #
+[commit]
+	gpgsign = true
+	template = /Users/martin/.stCommitMsg
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
