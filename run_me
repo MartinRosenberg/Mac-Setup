@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
 ################################################################################
-### Declare functions
+### Declare things
 ################################################################################
+
+BLOB="https://github.com/MartinRosenberg/Mac-Setup/blob/master"
+
+function copy_dotfiles {
+	cd ~
+	curl --location --remote-name-all "${BLOB}/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
+}
 
 function install_nvm {
 	if ! command -v nvm > /dev/null; then
-		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash > install_nvm.log
 	fi
 }
 
@@ -14,19 +21,13 @@ function install_homebrew {
 	if ! command -v brew > /dev/null; then
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	fi
-	curl -o- "${BLOB}/.Brewfile" | brew bundle install --verbose > brew_bundle.log
+	curl -o- "${BLOB}/Brewfile" | brew bundle install --verbose > brew_bundle_install.log
 }
 
 ################################################################################
 ### Do things
 ################################################################################
 
-BLOB="https://github.com/MartinRosenberg/Mac-Setup/blob/master"
-
-# Copy dotfiles
-cd ~
-curl --location --remote-name-all "${BLOB}/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
-
-# Install things
+copy_dotfiles &
 install_nvm &
 install_homebrew &
