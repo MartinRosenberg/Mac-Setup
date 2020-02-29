@@ -29,6 +29,6 @@ function install_homebrew {
 ### Do things
 ################################################################################
 
-copy_dotfiles &
-install_nvm &
-install_homebrew &
+copy_dotfiles
+install_nvm
+install_homebrew
