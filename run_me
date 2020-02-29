@@ -4,6 +4,4 @@ REPO="https://github.com/MartinRosenberg/Mac-Setup"
 BLOB="${REPO}/blob/master"
 
 cd ~
-curl -LO "${BLOB}/.bash_profile" &
-curl -LO "${BLOB}/.vimrc" &
-curl -LO "${BLOB}/.zshrc" &
+curl -L --remote-name-all "${BLOB}/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
