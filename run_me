@@ -13,7 +13,7 @@ function copy_dotfiles {
 
 function install_nvm {
 	if ! command -v nvm > /dev/null; then
-		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash > install_nvm.log
+		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 	fi
 }
 
