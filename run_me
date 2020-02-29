@@ -4,10 +4,13 @@ BLOB="https://github.com/MartinRosenberg/Mac-Setup/blob/master"
 
 # Copy dotfiles
 cd ~
-curl --location --remote-name-all "https://github.com/MartinRosenberg/Mac-Setup/blob/master/{.bash_profile,.Brewfile,.gitconfig,.vimrc,.zshrc}"
+curl --location --remote-name-all "https://github.com/MartinRosenberg/Mac-Setup/blob/master/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
 
 # Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Install everything else
-brew bundle install --global --verbose > brew_bundle.log
+# Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+
+# Install almost everything else
+curl -o- "https://github.com/MartinRosenberg/Mac-Setup/blob/master/.Brewfile" | brew bundle install --verbose > brew_bundle.log
