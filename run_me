@@ -9,7 +9,7 @@ BLOB="https://raw.githubusercontent.com/MartinRosenberg/Mac-Setup/master"
 function copy_dotfiles {
 	cd ~
 	curl --location --remote-name-all "${BLOB}/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
-	source .zshrc
+	source .bash_profile
 }
 
 function install_homebrew {
