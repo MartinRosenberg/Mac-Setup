@@ -4,31 +4,34 @@
 ### Declare things
 ################################################################################
 
-BLOB="https://raw.githubusercontent.com/MartinRosenberg/Mac-Setup/master"
-
-function copy_dotfiles {
-	cd ~
-	curl --location --remote-name-all "${BLOB}/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
-	source .bash_profile
-}
-
-function install_homebrew {
-	if ! command -v brew > /dev/null; then
-		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	fi
-	curl -o- "${BLOB}/Brewfile" | brew bundle install --verbose > brew_bundle_install.log
-}
-
-function install_nvm {
-	if ! command -v nvm > /dev/null; then
-		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-	fi
-}
+GH_RAW="https://raw.githubusercontent.com"
+BLOB="${GH_RAW}/MartinRosenberg/Mac-Setup/master"
 
 ################################################################################
 ### Do things
 ################################################################################
 
-copy_dotfiles
-install_homebrew
-install_nvm
+# Copy dotfiles
+cd ~
+curl --location --remote-name-all "${BLOB}/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
+
+# Can't use .zshrc yet
+source .bash_profile
+
+# Install Homebrew
+if ! command -v brew > /dev/null; then
+	/usr/bin/ruby -e "$( curl -fsSL "${GH_RAW}/Homebrew/install/master/install" )"
+fi
+
+# Install Brewfile
+curl -o- "${BLOB}/Brewfile" | brew bundle install --verbose
+
+# Install nvm
+if ! command -v nvm > /dev/null; then
+	curl -o- "${GH_RAW}/nvm-sh/nvm/v0.35.2/install.sh" | bash
+fi
+
+# Install iTerm2 shell integration
+if ! command -v it2check > /dev/null; then
+	curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
+fi
