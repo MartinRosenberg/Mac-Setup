@@ -9,6 +9,7 @@ BLOB="https://github.com/MartinRosenberg/Mac-Setup/blob/master"
 function copy_dotfiles {
 	cd ~
 	curl --location --remote-name-all "${BLOB}/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
+	source .zshrc
 }
 
 function install_nvm {
