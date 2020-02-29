@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function install_nvm {
+	if ! command -v nvm > /dev/null; then
+		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+	fi
+}
+
+function install_homebrew {
+	if ! command -v brew > /dev/null; then
+		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
+	curl -o- "${BLOB}/.Brewfile" | brew bundle install --verbose > brew_bundle.log
+}
