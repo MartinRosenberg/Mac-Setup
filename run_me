@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-REPO="https://github.com/MartinRosenberg/Mac-Setup"
-BLOB="${REPO}/blob/master"
+BLOB="https://github.com/MartinRosenberg/Mac-Setup/blob/master"
 
 # Copy dotfiles
 cd ~
-curl --location --remote-name-all "${BLOB}/{.bash_profile,.Brewfile,.gitconfig,.vimrc,.zshrc}"
+curl --location --remote-name-all "https://github.com/MartinRosenberg/Mac-Setup/blob/master/{.bash_profile,.Brewfile,.gitconfig,.vimrc,.zshrc}"
 
 # Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
