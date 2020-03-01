@@ -15,9 +15,6 @@ BLOB="${GH_RAW}/MartinRosenberg/Mac-Setup/master"
 cd ~
 curl --location --remote-name-all "${BLOB}/{.bash_profile,.gitconfig,.vimrc,.zshrc}"
 
-# Can't use .zshrc yet
-source .bash_profile
-
 # Install Homebrew
 if ! command -v brew > /dev/null; then
 	/usr/bin/ruby -e "$( curl -fsSL "${GH_RAW}/Homebrew/install/master/install" )"
@@ -25,6 +22,10 @@ fi
 
 # Install Brewfile
 curl -o- "${BLOB}/Brewfile" | brew bundle install --verbose
+
+# Switch shell to zsh
+chsh -s /bin/zsh
+source .zshrc
 
 # Install nvm
 if ! command -v nvm > /dev/null; then
